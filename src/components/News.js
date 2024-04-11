@@ -40,21 +40,22 @@ constructor(){
   // console.log("Hello Iam a constructor from News component");
   this.state ={
     articles:  [],
-    loading: false,
+    //loading: false,
     page:1
   }
 };
 
 async updateNews(){
-  let url = `https://newsapi.org/v2/top-headlines?country=in&category=${this.props.category}&apiKey=b96d04ef2343467a9dd24e2a8881eb98&page=1&pageSize=${this.props.pageSize}`;
-this.setState({
-  loading :true 
-})
+  let url = `https://newsapi.org/v2/top-headlines?country=in&category=${this.props.category}&apiKey=b96d04ef2343467a9dd24e2a8881eb98&page=${this.state.page}&pageSize=${this.props.pageSize}`;
+// this.setState({
+//   loading :true 
+// })
   let data = await fetch(url);
   let parsedData = await data.json()
   console.log(parsedData);
   this.setState({articles: parsedData.articles,totalArticles: parsedData.totalResults,
-    loading : false})
+    // loading : false
+  })
 }
 
 async componentDidMount(){
@@ -77,7 +78,7 @@ handlePrevClick = async () => {
 // })
 // this.props.pageSize-1
 this.setState({
-  pageSize :this.state.pageSize-1
+  page :this.state.page-1
 })
 this.updateNews();
 
@@ -98,7 +99,6 @@ this.setState({
   this.setState({articles: parsedData.articles})
    this.setState({
   page: this.state.page+1,
-  loading:false
  })
 }}
   render() {

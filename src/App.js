@@ -10,7 +10,7 @@ import News from './components/News';
  export default class App extends Component {
   // c = 'john'  document.title = "DailyNews"
 
-  pageSize = 12
+  page = 12
    render() {
      return (
     
